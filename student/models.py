@@ -27,4 +27,4 @@ class PresenceOrAbsence(models.Model):
     present = models.ManyToManyField(StudentsList,"presents")
 
     def __str__(self):
-        return self.date
+        return str(self.date)
