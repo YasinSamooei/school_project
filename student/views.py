@@ -5,8 +5,10 @@ from .models import StudentsList
 from .serializers import StudentsListSerializer , PresenceOrAbsenceSerializer
 from datetime import datetime
 from .models import StudentsList
+from drf_spectacular.utils import extend_schema , OpenApiParameter
 
 
+@extend_schema(tags=["بخش دانش آموزان"] , summary="اضافه کردن دانش آموز")
 class AddStudentView(APIView):
     serializer_class = StudentsListSerializer
     def post(self, request):
@@ -17,6 +19,7 @@ class AddStudentView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+@extend_schema(tags=["بخش دانش آموزان"] , summary="دریافت لیست کل دانش آموز ها")
 class StudentsListView(APIView):
     serializer_class = StudentsListSerializer
     def get(self, request):
@@ -25,7 +28,7 @@ class StudentsListView(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
-
+@extend_schema(tags=["بخش حضور و غیاب "] , summary="حضور و غیاب دانش آموزان")
 class AddPresenceOrAbsenceView(APIView):
     serializer_class = PresenceOrAbsenceSerializer
     def post(self, request):
