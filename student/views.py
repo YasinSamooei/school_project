@@ -8,7 +8,7 @@ from .models import StudentsList
 from drf_spectacular.utils import extend_schema , OpenApiParameter
 
 
-@extend_schema(tags=["بخش دانش آموزان"] , summary="اضافه کردن دانش آموز")
+@extend_schema(tags=["بخش دانش آموزان"] , summary="اضافه کردن دانش آموز" , description="سلام" , request=StudentsListSerializer , parameters=[OpenApiParameter(name="id",required=True,description="آیدی را وارد کنید:")])
 class AddStudentView(APIView):
     serializer_class = StudentsListSerializer
     def post(self, request):
@@ -28,7 +28,8 @@ class StudentsListView(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
-@extend_schema(tags=["بخش حضور و غیاب "] , summary="حضور و غیاب دانش آموزان")
+
+@extend_schema(tags=["بخش حضور و غیاب "] , summary="حضور و غیاب دانش آموزان" , request=PresenceOrAbsenceSerializer)
 class AddPresenceOrAbsenceView(APIView):
     serializer_class = PresenceOrAbsenceSerializer
     def post(self, request):
